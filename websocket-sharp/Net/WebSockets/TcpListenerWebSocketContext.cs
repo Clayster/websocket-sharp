@@ -110,17 +110,6 @@ namespace WebSocketSharp.Net.WebSockets
 
     #region Internal Properties
 
-    internal Logger Log {
-      get {
-        return _logger;
-      }
-    }
-
-    internal Stream Stream {
-      get {
-        return _stream;
-      }
-    }
 
     #endregion
 
@@ -353,11 +342,28 @@ namespace WebSocketSharp.Net.WebSockets
       }
     }
 
-    #endregion
+	public override Logger Log
+	{
+		get
+		{
+			return _logger;
+		}
+	}
 
-    #region Internal Methods
+	public override Stream Stream
+	{
+		get
+		{
+			return _stream;
+		}
+	}
 
-    internal bool Authenticate (
+
+		#endregion
+
+		#region Internal Methods
+
+		internal bool Authenticate (
       AuthenticationSchemes scheme,
       string realm,
       Func<IIdentity, NetworkCredential> credentialsFinder
@@ -404,7 +410,7 @@ namespace WebSocketSharp.Net.WebSockets
       return auth ();
     }
 
-    internal void Close ()
+    public override void Close ()
     {
       _stream.Close ();
       _tcpClient.Close ();
